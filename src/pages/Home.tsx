@@ -5,7 +5,7 @@ export default function Home() {
     return (
         <Container maxWidth="md" sx={{ mt: 4 }}>
             <Typography variant="h4" gutterBottom>
-                Welcome to Spotter Google Flights
+                Welcome to Spotter Flights
             </Typography>
             <SearchBar />
         </Container>
