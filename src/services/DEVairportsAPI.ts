@@ -1,6 +1,6 @@
 import type { Airport } from "../types";
 
-import { getFalseFetchAirports } from "./flightsAPI";
+import { getFalseFetchAirports } from "./DEVFetchAirports";
 
 export const fetchAirportsByQuery = async (query: string): Promise<Airport[]> => {
     console.log(query)
