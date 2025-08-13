@@ -1,9 +1,210 @@
-import type { Flight } from '../types';
+import type { FetchAirportsResponse } from '../types';
 
-export const getFlights = (): Flight[] => {
-    return [
-        { id: 1, airline: 'Airline A', price: 200, duration: '2h 30m', stops: 0 },
-        { id: 2, airline: 'Airline B', price: 150, duration: '3h 15m', stops: 1 },
-        { id: 3, airline: 'Airline C', price: 300, duration: '1h 45m', stops: 0 },
-    ]
+export const getFalseFetchAirports = (): FetchAirportsResponse => {
+    return {
+            "status": true,
+            "timestamp": 1755102876470,
+            "data": [
+                {
+                "skyId": "NYCA",
+                "entityId": "27537542",
+                "presentation": {
+                    "title": "New York",
+                    "suggestionTitle": "New York (Any)",
+                    "subtitle": "United States"
+                },
+                "navigation": {
+                    "entityId": "27537542",
+                    "entityType": "CITY",
+                    "localizedName": "New York",
+                    "relevantFlightParams": {
+                    "skyId": "NYCA",
+                    "entityId": "27537542",
+                    "flightPlaceType": "CITY",
+                    "localizedName": "New York"
+                    },
+                    "relevantHotelParams": {
+                    "entityId": "27537542",
+                    "entityType": "CITY",
+                    "localizedName": "New York"
+                    }
+                }
+                },
+                {
+                "skyId": "EWR",
+                "entityId": "95565059",
+                "presentation": {
+                    "title": "New York Newark",
+                    "suggestionTitle": "New York Newark (EWR)",
+                    "subtitle": "United States"
+                },
+                "navigation": {
+                    "entityId": "95565059",
+                    "entityType": "AIRPORT",
+                    "localizedName": "New York Newark",
+                    "relevantFlightParams": {
+                    "skyId": "EWR",
+                    "entityId": "95565059",
+                    "flightPlaceType": "AIRPORT",
+                    "localizedName": "New York Newark"
+                    },
+                    "relevantHotelParams": {
+                    "entityId": "27537542",
+                    "entityType": "CITY",
+                    "localizedName": "New York"
+                    }
+                }
+                },
+                {
+                "skyId": "JFK",
+                "entityId": "95565058",
+                "presentation": {
+                    "title": "New York John F. Kennedy",
+                    "suggestionTitle": "New York John F. Kennedy (JFK)",
+                    "subtitle": "United States"
+                },
+                "navigation": {
+                    "entityId": "95565058",
+                    "entityType": "AIRPORT",
+                    "localizedName": "New York John F. Kennedy",
+                    "relevantFlightParams": {
+                    "skyId": "JFK",
+                    "entityId": "95565058",
+                    "flightPlaceType": "AIRPORT",
+                    "localizedName": "New York John F. Kennedy"
+                    },
+                    "relevantHotelParams": {
+                    "entityId": "27537542",
+                    "entityType": "CITY",
+                    "localizedName": "New York"
+                    }
+                }
+                },
+                {
+                "skyId": "LGA",
+                "entityId": "95565057",
+                "presentation": {
+                    "title": "New York LaGuardia",
+                    "suggestionTitle": "New York LaGuardia (LGA)",
+                    "subtitle": "United States"
+                },
+                "navigation": {
+                    "entityId": "95565057",
+                    "entityType": "AIRPORT",
+                    "localizedName": "New York LaGuardia",
+                    "relevantFlightParams": {
+                    "skyId": "LGA",
+                    "entityId": "95565057",
+                    "flightPlaceType": "AIRPORT",
+                    "localizedName": "New York LaGuardia"
+                    },
+                    "relevantHotelParams": {
+                    "entityId": "27537542",
+                    "entityType": "CITY",
+                    "localizedName": "New York"
+                    }
+                }
+                },
+                {
+                "skyId": "SWF",
+                "entityId": "95566280",
+                "presentation": {
+                    "title": "Stewart International",
+                    "suggestionTitle": "Stewart International (SWF)",
+                    "subtitle": "United States"
+                },
+                "navigation": {
+                    "entityId": "95566280",
+                    "entityType": "AIRPORT",
+                    "localizedName": "Stewart International",
+                    "relevantFlightParams": {
+                    "skyId": "SWF",
+                    "entityId": "95566280",
+                    "flightPlaceType": "AIRPORT",
+                    "localizedName": "Stewart International"
+                    },
+                    "relevantHotelParams": {
+                    "entityId": "27537542",
+                    "entityType": "CITY",
+                    "localizedName": "New York"
+                    }
+                }
+                },
+                {
+                "skyId": "NCL",
+                "entityId": "95674044",
+                "presentation": {
+                    "title": "Newcastle",
+                    "suggestionTitle": "Newcastle (NCL)",
+                    "subtitle": "United Kingdom"
+                },
+                "navigation": {
+                    "entityId": "95674044",
+                    "entityType": "AIRPORT",
+                    "localizedName": "Newcastle",
+                    "relevantFlightParams": {
+                    "skyId": "NCL",
+                    "entityId": "95674044",
+                    "flightPlaceType": "AIRPORT",
+                    "localizedName": "Newcastle"
+                    },
+                    "relevantHotelParams": {
+                    "entityId": "27545092",
+                    "entityType": "CITY",
+                    "localizedName": "Newcastle"
+                    }
+                }
+                },
+                {
+                "skyId": "NQY",
+                "entityId": "95673963",
+                "presentation": {
+                    "title": "Newquay",
+                    "suggestionTitle": "Newquay (NQY)",
+                    "subtitle": "United Kingdom"
+                },
+                "navigation": {
+                    "entityId": "95673963",
+                    "entityType": "AIRPORT",
+                    "localizedName": "Newquay",
+                    "relevantFlightParams": {
+                    "skyId": "NQY",
+                    "entityId": "95673963",
+                    "flightPlaceType": "AIRPORT",
+                    "localizedName": "Newquay"
+                    },
+                    "relevantHotelParams": {
+                    "entityId": "27545149",
+                    "entityType": "CITY",
+                    "localizedName": "Newquay"
+                    }
+                }
+                },
+                {
+                "skyId": "NZ",
+                "entityId": "29475342",
+                "presentation": {
+                    "title": "New Zealand",
+                    "suggestionTitle": "New Zealand",
+                    "subtitle": ""
+                },
+                "navigation": {
+                    "entityId": "29475342",
+                    "entityType": "COUNTRY",
+                    "localizedName": "New Zealand",
+                    "relevantFlightParams": {
+                    "skyId": "NZ",
+                    "entityId": "29475342",
+                    "flightPlaceType": "COUNTRY",
+                    "localizedName": "New Zealand"
+                    },
+                    "relevantHotelParams": {
+                    "entityId": "29475342",
+                    "entityType": "COUNTRY",
+                    "localizedName": "New Zealand"
+                    }
+                }
+                }
+            ]
+            }
 }

@@ -1,36 +1,60 @@
-import { Box, TextField, Button } from '@mui/material';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import dayjs from "dayjs";
+import { useState, useEffect } from "react";
+import { Autocomplete, TextField, CircularProgress } from "@mui/material";
+// import { fetchAirportsByQuery } from "../services/airportsAPI";      ////////////////////////////////Change for deploy
+import { fetchAirportsByQuery } from "../services/DEVairportsAPI";      ////////////////////////////////Change for deploy
+import type { Airport } from "../types";
 
-export default function SearchBar() {
-    const navigate = useNavigate();
-    const [origin, setOrigin] = useState('');
-    const [destination, setDestination] = useState('');
-    const [departure, setDeparture] = useState(dayjs().format('YYYY-MM-DD'));
-    const [returnDate, setReturnDate] = useState(dayjs().add(7, "day").format('YYYY-MM-DD'));
+interface SearchBarProps {
+  label: string;
+  onSelect: (airport: Airport | null) => void;
+}
 
-    const handleSearch = () => {
-        navigate("/results");
-    };
+export default function SearchBar({ label, onSelect }: SearchBarProps) {
+  const [inputValue, setInputValue] = useState("");
+  const [options, setOptions] = useState<Airport[]>([]);
+  const [loading, setLoading] = useState(false);
 
-    return (
-        <Box display="flex" gap={2} flexWrap="wrap">
-            <TextField label="Origin" value={origin} 
-                onChange={(e) => setOrigin(e.target.value)} 
-            />
-            <TextField label="Destination" value={destination} 
-                onChange={(e) => setDestination(e.target.value)} 
-            />
-            <TextField type="date" label="Departure" value={departure} 
-                onChange={(e) => setDeparture(e.target.value)} slotProps={{ inputLabel: { shrink: true } }}
-            />
-            <TextField type="date" label="Return" value={returnDate} 
-                onChange={(e) => setReturnDate(e.target.value)} slotProps={{ inputLabel: { shrink: true } }}
-            />
-            <Button variant="contained" onClick={handleSearch}>
-                Search Flights
-            </Button>
-        </Box>
-    )
+  useEffect(() => {
+    const handler = setTimeout(async () => {
+      if (inputValue.length >= 3) {
+        setLoading(true);
+        try {
+          const results = await fetchAirportsByQuery(inputValue);
+          setOptions(results);
+        } finally {
+          setLoading(false);
+        }
+      } else {
+        setOptions([]);
+      }
+    }, 400);
+
+    return () => clearTimeout(handler);
+  }, [inputValue]);
+
+  return (
+    <Autocomplete
+      options={options}
+      getOptionLabel={(option) => `${option.name}`}
+      loading={loading}
+      onChange={(_, value) => onSelect(value)}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          label={label}
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          InputProps={{
+            ...params.InputProps,
+            endAdornment: (
+              <>
+                {loading ? <CircularProgress color="inherit" size={20} /> : null}
+                {params.InputProps.endAdornment}
+              </>
+            ),
+          }}
+        />
+      )}
+    />
+  );
 }
