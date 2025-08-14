@@ -2,32 +2,29 @@ import { Box, Container, Typography, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 // import { fetchFlightsByQuery } from "../services/flightsAPI";         ////////////////////////////////Change for deploy    
-import { fetchFlightsByQuery } from "../services/DEVflightsAPI";      ////////////////////////////////Change for deploy
+import { fetchFlightsByQuery } from "../services/DEV/DEVflightsAPI";      ////////////////////////////////Change for deploy
 
 import FilterSidebar from "../components/FilterSidebar";
 import FlightCard from "../components/FlightCard";
 import type { FlightItinerary } from "../types";
 
-// function useQuery() {
-//   return new URLSearchParams(useLocation().search);
-// }
 
 export default function Results() {
   const location = useLocation();
   const query = new URLSearchParams(location.search);
-  const from = query.get("from");
-  const to = query.get("to");
+  const originSkyId = query.get("originSkyId");
+  const destinationSkyId = query.get("destinationSkyId");
   const [flights, setFlights] = useState<FlightItinerary[]>([]);
   
   useEffect(() => {
     const fetchFlights = async () => {
-      if (from && to) {
+      if (originSkyId && destinationSkyId) {
         const data = await fetchFlightsByQuery(query);
         setFlights(data);
       }
     };
     fetchFlights();
-  }, [from, to]);
+  }, [originSkyId, destinationSkyId]);
 
   return (
     <Container maxWidth="md" sx={{ mt: 4 }}>

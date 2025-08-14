@@ -10,7 +10,7 @@ export default function FlightCard({ flight }: Props) {
         <Card variant="outlined">
             <CardContent>
                 <Typography variant="h6">{flight.id}</Typography>
-                <Typography>Price: {flight.price}</Typography>
+                <Typography>Price: {flight.price.formatted}</Typography>
                 <Typography variant="subtitle1" sx={{ mt: 1 }}>Legs:</Typography>
                 {flight.legs.map((leg) => (
                     <Card key={leg.id} variant="outlined" sx={{ mb: 1, p: 1 }}>
@@ -19,7 +19,7 @@ export default function FlightCard({ flight }: Props) {
                         </Typography>
                         <Typography>Duration: {leg.durationInMinutes} minutes</Typography>
                         <Typography>
-                            Operating carriers: {leg.carriers.operating.map(c => c.name).join(", ")}
+                            Operating carriers: {leg.carriers?.operating?.map(c => c.name).join(", ") || leg.carriers?.marketing?.map(c => c.name).join(", ") || "N/A"}
                         </Typography>
                     </Card>
                 ))}

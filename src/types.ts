@@ -5,7 +5,7 @@ export interface Flight {
     duration: string;
     stops: number;
 }
-export interface Operating {
+export interface CarriersOptions {
     logoUrl: string;
     name: string;
 }
@@ -16,22 +16,27 @@ export interface Leg {
     departure: string;
     arrival:  string;
     carriers: {
-        operating: Operating[]
+        operating: CarriersOptions[],
+        marketing: CarriersOptions[]
     };
 }
 
 export interface FlightItinerary {
     id: string;
-    price: string;
+    price: {
+        raw: number;
+        formatted: string;
+        pricingOptionId: string;
+    };
     legs: Leg[];
 }
 
 export interface Airport {
-    id: string;
+    skyId: string;
     name: string;
     city: string;
     country: string;
-    iata: string;
+    entityId: string;
 }
 
 export interface RawAirport {

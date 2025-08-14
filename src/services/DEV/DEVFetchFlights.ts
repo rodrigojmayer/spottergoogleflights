@@ -1,4 +1,4 @@
-import type { FetchFlightsResponse } from '../types';
+import type { FetchFlightsResponse } from '../../types';
 
 export const getFalseFetchFlights = (): FetchFlightsResponse => {
     return {

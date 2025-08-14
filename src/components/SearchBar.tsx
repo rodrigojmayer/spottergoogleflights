@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Autocomplete, TextField, CircularProgress } from "@mui/material";
 // import { fetchAirportsByQuery } from "../services/airportsAPI";      ////////////////////////////////Change for deploy
-import { fetchAirportsByQuery } from "../services/DEVairportsAPI";      ////////////////////////////////Change for deploy
+import { fetchAirportsByQuery } from "../services/DEV/DEVairportsAPI";      ////////////////////////////////Change for deploy
 import type { Airport } from "../types";
 
 interface SearchBarProps {

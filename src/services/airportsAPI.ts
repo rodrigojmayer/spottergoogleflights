@@ -17,10 +17,10 @@ export const fetchAirportsByQuery = async (query: string): Promise<Airport[]> =>
   );
 
   return response.data.data.map((a) => ({
-    id: a.skyId,
+    skyId: a.skyId,
     name: a.presentation.suggestionTitle || a.presentation.title,
     city: a.navigation.relevantHotelParams.localizedName,
     country: a.presentation.subtitle,
-    iata: a.entityId,
+    entityId: a.entityId,
   }));
 };
