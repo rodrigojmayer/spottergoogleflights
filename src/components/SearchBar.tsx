@@ -43,7 +43,7 @@ export default function SearchBar({ label, onSelect }: SearchBarProps) {
           {...params}
           label={label}
           value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value)}
           InputProps={{
             ...params.InputProps,
             endAdornment: (

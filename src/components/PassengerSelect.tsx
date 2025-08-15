@@ -43,7 +43,7 @@ export default function PassengerSelect({
         open={open}
         onOpen={() => {setOpen(true); setActive("select2")}}
         onClose={() => {setOpen(false); setActive(null)}}
-        onClick={(e) => e.stopPropagation()} 
+        onClick={(e: React.MouseEvent) => e.stopPropagation()} 
         value=""
         displayEmpty
         input={
@@ -85,7 +85,7 @@ export default function PassengerSelect({
         <MenuItem 
             disableRipple 
             sx={{ display: "block", cursor: "default", backgroundColor: "rgb(0,0,0,0)!important"  }}
-            onClick={(e) => e.stopPropagation()} 
+            onClick={(e: React.MouseEvent) => e.stopPropagation()} 
         >
           {[
             { label: "Adults", sub: "", key: "adults" },
@@ -101,7 +101,7 @@ export default function PassengerSelect({
                 alignItems: "center",
                 // py: 1
               }}
-                onClick={(e) => e.stopPropagation()} 
+                onClick={(e: React.MouseEvent) => e.stopPropagation()} 
             >
               <Box>
                 <Typography>{label}</Typography>
@@ -114,7 +114,7 @@ export default function PassengerSelect({
               <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                 <IconButton
                     size="small"
-                    onClick={(e) => {
+                    onClick={(e: React.MouseEvent) => {
                         e.stopPropagation();
                         handleChange(key as keyof typeof passengers, -1)
                     }}
@@ -124,7 +124,7 @@ export default function PassengerSelect({
                 <Typography>{passengers[key as keyof typeof passengers]}</Typography>
                 <IconButton
                     size="small"
-                    onClick={(e) => {
+                    onClick={(e: React.MouseEvent) => {
                         e.stopPropagation();
                         handleChange(key as keyof typeof passengers, 1)
                     }}

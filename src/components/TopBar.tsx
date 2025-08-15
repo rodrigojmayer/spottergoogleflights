@@ -1,5 +1,5 @@
 import { Box, Button, useTheme } from "@mui/material";
-import * as React from "react";
+import {useState} from "react";
 import Stack from "@mui/material/Stack";
 import TravelExploreIcon from "@mui/icons-material/TravelExplore";
 import LuggageIcon from '@mui/icons-material/Luggage';
@@ -17,7 +17,7 @@ export default function TopBar() {
 
     const darkMode = false;
 
-    const [active, setActive] = React.useState("Flights");
+    const [active, setActive] = useState("Flights");
 
     const buttons = [
         { label: "Travel", icon: <LuggageIcon /> },
