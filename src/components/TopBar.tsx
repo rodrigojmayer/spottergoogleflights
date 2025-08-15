@@ -12,13 +12,10 @@ import AppsIcon from '@mui/icons-material/Apps';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
 
-export default function TopBar() {
+export default function TopBar({ darkMode, setDarkMode }: { darkMode: boolean; setDarkMode: (val: boolean) => void; }) {
+    
     const theme = useTheme();
-
-    const darkMode = false;
-
     const [active, setActive] = useState("Flights");
-
     const buttons = [
         { label: "Travel", icon: <LuggageIcon /> },
         { label: "Explore", icon: <TravelExploreIcon /> },
@@ -34,8 +31,7 @@ export default function TopBar() {
                 alignItems: "center",
                 justifyContent: "space-between",
                 marginLeft: 2,
-                borderBottom: "1px solid #e0e0e0",
-                backgroundColor: "#fff",
+                borderBottom: "1px solid #969696c7",
                 position: "sticky",
                 top: 0,
                 zIndex: 1000,
@@ -103,9 +99,8 @@ export default function TopBar() {
         </Box>
 
             <Box >
-                <IconButton sx={{marginRight: 2, "&:focus": { outline: "none"} }} >
-                    <WbSunnyOutlinedIcon sx={{display: darkMode?"block":"none" }}/>
-                    <DarkModeIcon sx={{display: darkMode?"none":"block" }}/>
+                <IconButton onClick={() => setDarkMode(!darkMode)} sx={{marginRight: 2, "&:focus": { outline: "none"} }}>
+                    {darkMode ? <WbSunnyOutlinedIcon /> : <DarkModeIcon />}
                 </IconButton>
                 <IconButton sx={{marginRight: 2, "&:focus": { outline: "none"} }} >
                     <AppsIcon/>
