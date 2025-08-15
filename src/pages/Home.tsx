@@ -125,10 +125,8 @@ export default function Home() {
                 
                 <Box 
                     sx={{
-                        width: "100%",
-                        maxWidth: "100%",
                         [theme.breakpoints.up("sm")]: {  
-                            maxWidth: "60%",
+                            width: "70%",
                             minWidth: 0
                         },
                     }}
@@ -136,17 +134,19 @@ export default function Home() {
                     <Card
                         sx={{
                             display: "flex",
+                            flexDirection: "column",
                             p: 1,
                             gap: 2,
                             flexWrap: "wrap",
-                            alignItems: "center",
                             borderRadius: "0px 0px 10px 10px",
                             boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.5)",
-                            width: "100%",
+                            width: "95%",
                             margin: "0",
                             borderTop: "none",
+                                pb:5,
                             [theme.breakpoints.up("sm")]: {  
                                 p: 3,
+                                pb:5,
                                 width: "90%",
                                 boxShadow: 2,
                                 borderRadius: 3,
@@ -163,28 +163,54 @@ export default function Home() {
                             cabinClass={cabinClass}
                             setCabinClass={setCabinClass}
                         />
-                        <SearchBar label="From" onSelect={(airport) => setDeparture(airport)} />
-                        <SearchBar label="To" onSelect={(airport) => setDestination(airport)} />
-
-                        <FlightDatePicker
-                            tripType={tripType}
-                            departureDate={departureDate}
-                            setDepartureDate={setDepartureDate}
-                            returnDate={returnDate}
-                            setReturnDate={setReturnDate}
-                        />
-
+                        <Box
+                            sx={{ width: "100%", display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: 1 }}
+                        >
+                            <Box 
+                                 sx= {{ display: "flex", flexWrap: "wrap", width: { xs: "100%", sm: "55%"  } }}
+                            >
+                                <SearchBar label="From" onSelect={(airport) => setDeparture(airport)} />
+                                <SearchBar label="To" onSelect={(airport) => setDestination(airport)} />
+                            </Box>
+                            <FlightDatePicker
+                                tripType={tripType}
+                                departureDate={departureDate}
+                                setDepartureDate={setDepartureDate}
+                                returnDate={returnDate}
+                                setReturnDate={setReturnDate}
+                            />
+                        </Box>
+                    </Card>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                justifyContent: "center", 
+                            }}
+                        >
                         <Button
                             variant="contained"
                             color="primary"
-                            sx={{ px: 4, py: 1.2, borderRadius: "30px" }}
+                            
+                            sx={{ 
+                                display: "relative", 
+                                top: -20, 
+                                px: 4, 
+                                py: 1.2, 
+                                borderRadius: "30px", 
+                                maxWidth:"110px",
+                                "&.Mui-disabled": {
+                                    opacity: 1,
+                                    color: "rgba(53, 53, 53, 1)", 
+                                    backgroundColor: "rgba(218, 218, 218, 1)", 
+                                },
+                            }}
                             disabled={!departure || !destination}
                             onClick={handleSearch}
                         >
                             <SearchIcon/>
                             Explore
                         </Button>
-                    </Card>
+                    </Box>
                 </Box>
             </Box>
         </Box>

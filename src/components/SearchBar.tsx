@@ -37,6 +37,9 @@ export default function SearchBar({ label, onSelect }: SearchBarProps) {
       options={options}
       getOptionLabel={(option) => `${option.name}`}
       loading={loading}
+      // sx={{ width: "30%" }}
+      
+      sx= {{ width: { xs: "50%" } }}
       onChange={(_, value) => onSelect(value)}
       renderInput={(params) => (
         <TextField

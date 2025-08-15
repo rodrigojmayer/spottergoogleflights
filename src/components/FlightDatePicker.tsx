@@ -25,7 +25,8 @@ export default function FlightDatePicker({
 
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <Box sx={{ display: "flex", gap: 0 }}>
+            <Box sx={{ display: "flex", flexWrap: "wrap",  width: { xs: "100%", sm: "42%"  }}}>
+
                 <DatePicker
                     label="Departure"
                     value={departureDate}
@@ -44,6 +45,7 @@ export default function FlightDatePicker({
                         textField: {
                             variant: "outlined",
                             onClick: () => setOpenDepartureDate(true),
+                            sx: { width: { xs: "50%" } },
                         },
                         popper: {
                             modifiers: [
@@ -73,20 +75,21 @@ export default function FlightDatePicker({
                         format="ddd, MMM D"
                         slotProps={{
                             textField: {
-                            variant: "outlined",
-                            onClick: () => setOpenReturnDate(true),
+                                variant: "outlined",
+                                onClick: () => setOpenReturnDate(true),
+                                sx: { width: { xs: "50%"} },
                             },
                             popper: {
-                            modifiers: [
-                                { name: "offset", options: { offset: [0, -50] } },
-                                { name: "preventOverflow", options: { padding: 8 } },
-                            ],
-                            sx: {
-                                "& .MuiPaper-root": {
-                                maxHeight: 510,
-                                minWidth: 280,
+                                modifiers: [
+                                    { name: "offset", options: { offset: [0, -50] } },
+                                    { name: "preventOverflow", options: { padding: 8 } },
+                                ],
+                                sx: {
+                                    "& .MuiPaper-root": {
+                                        maxHeight: 510,
+                                        minWidth: 280,
+                                    },
                                 },
-                            },
                             },
                         }}
                     />
