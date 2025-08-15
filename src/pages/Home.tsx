@@ -3,28 +3,34 @@ import {
     Box,
     Button,
     Card,
-    MenuItem,
-    Select,
     Typography,
-    FormControl
+    useTheme,
 } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import TopBar from "../components/TopBar";
 import { useNavigate } from "react-router-dom";
 import SearchBar from "../components/SearchBar";
-import type { Airport } from "../types";
+import type { Airport, Passengers } from "../types";
 import dayjs from "dayjs";
+import FlightOptionsBar from "../components/FlightOptionsBar";
 
 export default function Home() {
     
+    const theme = useTheme();
     const darkMode = false;
 
+    const [activeFlightOptionsBar, setActiveFlightOptionsBar] = useState<string | null>(null);
     const [departure, setDeparture] = useState<Airport | null>(null);
     const [destination, setDestination] = useState<Airport | null>(null);
     const [departureDate, setDepartureDate] = useState(dayjs().format('YYYY-MM-DD'));
     const [returnDate, setReturnDate] = useState(dayjs().add(7, "day").format('YYYY-MM-DD'));
     const [tripType, setTripType] = useState("round");
-    const [passengers, setPassengers] = useState(1);
+    const [passengers, setPassengers] = useState<Passengers>({
+        adults: 1,
+        children: 0,
+        infantsSeat: 0,
+        infantsLap: 0
+    });
     const [cabinClass, setCabinClass] = useState("economy");
     const navigate = useNavigate();
     
@@ -49,11 +55,15 @@ export default function Home() {
         }
     };
 
-
     return (
     <Box 
+        onClick={() => setActiveFlightOptionsBar(null)}
         sx={{
-                // minWidth: "100%",
+            display: "grid",
+            gridTemplateColumns: "1fr", 
+            [theme.breakpoints.up("md")]: {
+                gridTemplateColumns: "repeat(1, 1fr)",
+            },
         }}
     >
         <TopBar />
@@ -64,15 +74,15 @@ export default function Home() {
                 flexDirection: 'column',
                 justifyContent: "center",
                 alignItems: "center",
-                px: "2%"
+                [theme.breakpoints.up("sm")]: {
+                    px: "2%",
+                }
             }}
         >
             <Box
                 sx={{
-                    width: "95%",
-                    height: "10px",
-                    // backgroundImage: `url("/public/images/illustrations-for-web-and-v0-oj364whigbid1.webp")`,
-                    // backgroundImage: `url("/public/images/flights_nc_4.svg")`,
+                    width: "100%",
+                    minHeight: "200px", 
                     backgroundImage: darkMode 
                     ? 'url("/public/images/flights_nc_dark_theme_4.svg")' 
                     : 'url("/public/images/flights_nc_4.svg")',
@@ -80,17 +90,32 @@ export default function Home() {
                     backgroundPosition: "center",
                     display: "flex",
                     justifyContent: "center",
-                    pt: 40
+                    pt: 0,
+                    [theme.breakpoints.up("sm")]: {
+                        width: "95%",
+                        minHeight: "30px",
+                    pt: 36,
+                    },
+                    [theme.breakpoints.up("md")]: {
+                        minHeight: "10px",
+                        height: "10px",
+                    },
                 }}
             >
             <Typography
                     variant="h3"
                     fontWeight="bold"
                     sx={{
-                    px: 3,
-                    position: "relative",
-                    bottom: 60,
-                    borderRadius: 2,
+                        px: 3,
+                        position: "relative",
+                        top: 150,
+                        borderRadius: 2,
+                        [theme.breakpoints.up("sm")]: {  
+                            top: -90, 
+                        },
+                        [theme.breakpoints.up("md")]: {
+                            
+                        },
                     }}
                 >
                     Flights
@@ -98,49 +123,48 @@ export default function Home() {
 
             </Box>
             
-            <Box>
+            <Box 
+            
+                    sx={{
+                        width: "100%",
+                        maxWidth: "100%",
+                        [theme.breakpoints.up("sm")]: {  
+                            maxWidth: "60%",
+                            minWidth: 0
+                        },
+                    }}
+            >
                 <Card
                     sx={{
-                    p: 3,
                     display: "flex",
+                    p: 1,
                     gap: 2,
                     flexWrap: "wrap",
                     alignItems: "center",
-                    borderRadius: 3,
+                    borderRadius: "0px 0px 10px 10px",
+                     boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.5)",
+                    width: "100%",
+                    margin: "0",
+                    borderTop: "none",
+
+                    [theme.breakpoints.up("sm")]: {  
+                        p: 3,
+                    width: "90%",
                     boxShadow: 2,
-                    maxWidth: "1000px",
-                    mt:3,
+                    borderRadius: 3,
+                    },
                     }}
                 >
-                    <FormControl size="small">
-                    <Select value={tripType} onChange={(e) => setTripType(e.target.value)}>
-                        <MenuItem value="round">Round trip</MenuItem>
-                        <MenuItem value="oneway">One way</MenuItem>
-                    </Select>
-                    </FormControl>
-
-                    <FormControl size="small">
-                    <Select
-                        value={passengers}
-                        onChange={(e) => setPassengers(Number(e.target.value))}
-                    >
-                        {[1, 2, 3, 4, 5, 6].map((n) => (
-                        <MenuItem key={n} value={n}>
-                            {n}
-                        </MenuItem>
-                        ))}
-                    </Select>
-                    </FormControl>
-
-                    <FormControl size="small">
-                    <Select value={cabinClass} onChange={(e) => setCabinClass(e.target.value)}>
-                        <MenuItem value="economy">Economy</MenuItem>
-                        <MenuItem value="premium">Premium Economy</MenuItem>
-                        <MenuItem value="business">Business</MenuItem>
-                        <MenuItem value="first">First</MenuItem>
-                    </Select>
-                    </FormControl>
-
+                    <FlightOptionsBar
+                        active={activeFlightOptionsBar}
+                        setActive={setActiveFlightOptionsBar}
+                        tripType={tripType}
+                        setTripType={setTripType}
+                        passengers={passengers}
+                        setPassengers={setPassengers}
+                        cabinClass={cabinClass}
+                        setCabinClass={setCabinClass}
+                    />
                     <SearchBar label="From" onSelect={(airport) => setDeparture(airport)} />
                     <SearchBar label="To" onSelect={(airport) => setDestination(airport)} />
 

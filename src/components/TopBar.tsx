@@ -1,8 +1,8 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, useTheme } from "@mui/material";
 import * as React from "react";
 import Stack from "@mui/material/Stack";
 import TravelExploreIcon from "@mui/icons-material/TravelExplore";
-import ExploreIcon from "@mui/icons-material/Explore";
+import LuggageIcon from '@mui/icons-material/Luggage';
 import FlightIcon from "@mui/icons-material/Flight";
 import HotelIcon from "@mui/icons-material/Hotel";
 import HomeIcon from "@mui/icons-material/Home";
@@ -13,14 +13,15 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
 
 export default function TopBar() {
+    const theme = useTheme();
 
     const darkMode = false;
 
     const [active, setActive] = React.useState("Flights");
 
     const buttons = [
-        { label: "Travel", icon: <TravelExploreIcon /> },
-        { label: "Explore", icon: <ExploreIcon /> },
+        { label: "Travel", icon: <LuggageIcon /> },
+        { label: "Explore", icon: <TravelExploreIcon /> },
         { label: "Flights", icon: <FlightIcon /> },
         { label: "Hotels", icon: <HotelIcon /> },
         { label: "Vacation rentals", icon: <HomeIcon /> },
@@ -49,7 +50,15 @@ export default function TopBar() {
                 alt="Logo"
                 style={{ height: 70, cursor: "pointer"}}
             />
-            <Stack direction="row" spacing={1}>
+            <Stack direction="row" spacing={1} 
+                sx={{
+                    
+                    display: "none",
+                    [theme.breakpoints.up("md")]: {
+                        display: "block",
+                    }
+                }}
+            >
                 {buttons.map((btn) => (
                     <Button
                     key={btn.label}
@@ -83,7 +92,7 @@ export default function TopBar() {
                             boxShadow: "none",
                         },
                         "& .MuiButton-startIcon": {
-                            color: "#1a73e8", // blue icon, text stays black
+                            color: "#1a73e8", 
                         },
                     }}
                     >
@@ -93,18 +102,14 @@ export default function TopBar() {
                 </Stack>
         </Box>
 
-            <Box sx={{ 
-                // display: "flex", 
-                // alignItems: "center", 
-                // marginRight: 3 , margin: 1
-            }}>
-                    <IconButton sx={{marginRight: 2, "&:focus": { outline: "none"} }} >
-                        <WbSunnyOutlinedIcon sx={{display: darkMode?"block":"none" }}/>
-                        <DarkModeIcon sx={{display: darkMode?"none":"block" }}/>
-                    </IconButton>
-                    <IconButton sx={{marginRight: 2, "&:focus": { outline: "none"} }} >
-                        <AppsIcon/>
-                    </IconButton>
+            <Box >
+                <IconButton sx={{marginRight: 2, "&:focus": { outline: "none"} }} >
+                    <WbSunnyOutlinedIcon sx={{display: darkMode?"block":"none" }}/>
+                    <DarkModeIcon sx={{display: darkMode?"none":"block" }}/>
+                </IconButton>
+                <IconButton sx={{marginRight: 2, "&:focus": { outline: "none"} }} >
+                    <AppsIcon/>
+                </IconButton>
             <Button 
                 variant="outlined" 
                 sx={{

@@ -33,7 +33,7 @@ export default function SearchBar({ label, onSelect }: SearchBarProps) {
   }, [inputValue]);
 
   return (
-    <Autocomplete
+    <Autocomplete 
       options={options}
       getOptionLabel={(option) => `${option.name}`}
       loading={loading}

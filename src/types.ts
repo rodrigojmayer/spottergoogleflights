@@ -54,6 +54,12 @@ export interface RawAirport {
     entityId: string;
 }
 
+export interface Passengers {
+    adults: number,
+    children: number,
+    infantsSeat: number,
+    infantsLap: number
+}
 
 
 
