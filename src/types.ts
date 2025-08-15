@@ -19,6 +19,7 @@ export interface Leg {
         operating: CarriersOptions[],
         marketing: CarriersOptions[]
     };
+    stopCount: number,
 }
 
 export interface FlightItinerary {

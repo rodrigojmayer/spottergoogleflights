@@ -1,52 +1,36 @@
-import { useState } from "react";
 import { 
     Box,
     Button,
-    Card,
     Typography,
     useTheme,
-    // ThemeProvider, 
-    // createTheme, 
-    // CssBaseline
 } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
-// import TopBar from "../components/TopBar";
 import { useNavigate } from "react-router-dom";
-import SearchBar from "../components/SearchBar";
-import type { Airport, Passengers } from "../types";
-import FlightOptionsBar from "../components/FlightOptionsBar";
-import dayjs, { Dayjs } from "dayjs";
-import FlightDatePicker from "../components/FlightDatePicker"; 
+import dayjs from "dayjs";
+import FlightSearchPanel from "../components/FlightSearchPanel";
+import { useFlightSearch } from "../context/useFlightSearch";
 
 type HomeProps = {
-  darkMode?: boolean; // optional
+  darkMode?: boolean; 
 };
 export default function Home({ darkMode }: HomeProps) {
     
     const theme = useTheme();
-    // const [darkMode, setDarkMode] = useState(false);
-    // const theme = createTheme({
-    //     palette: {
-    //         mode: darkMode ? "dark" : "light",
-    //     },
-    // });
-    // const darkModeVAR= "light"
-
-    const [activeFlightOptionsBar, setActiveFlightOptionsBar] = useState<string | null>(null);
-    const [departure, setDeparture] = useState<Airport | null>(null);
-    const [destination, setDestination] = useState<Airport | null>(null);
-    const [departureDate, setDepartureDate] = useState<Dayjs | null>(null);
-    const [returnDate, setReturnDate] = useState<Dayjs | null>(null);
-    const [tripType, setTripType] = useState("round");
-    const [passengers, setPassengers] = useState<Passengers>({
-        adults: 1,
-        children: 0,
-        infantsSeat: 0,
-        infantsLap: 0
-    });
-    const [cabinClass, setCabinClass] = useState("economy");
     const navigate = useNavigate();
     
+  const {
+    activeFlightOptionsBar, setActiveFlightOptionsBar,
+    departure, setDeparture,
+    destination, setDestination,
+    departureDate, setDepartureDate,
+    returnDate, setReturnDate,
+    tripType, setTripType,
+    passengers, setPassengers,
+    cabinClass, setCabinClass
+  } = useFlightSearch();
+
+
+  
     const handleSearch = () => {
         if (departure && destination) {
         const params = new URLSearchParams({
@@ -70,8 +54,6 @@ export default function Home({ darkMode }: HomeProps) {
 
     return (
         
-        // <ThemeProvider theme={theme}>
-        //     <CssBaseline />
             <Box 
                 onClick={() => setActiveFlightOptionsBar(null)}
                 sx={{
@@ -82,7 +64,6 @@ export default function Home({ darkMode }: HomeProps) {
                     },
                 }}
             >
-                {/* <TopBar darkMode={darkMode} setDarkMode={setDarkMode} /> */}
                 
                 <Box 
                     sx={{
@@ -120,7 +101,7 @@ export default function Home({ darkMode }: HomeProps) {
                     >
                     <Typography
                             variant="h3"
-                            fontWeight="bold"
+                            // fontWeight="bold"
                             sx={{
                                 px: 3,
                                 position: "relative",
@@ -146,56 +127,28 @@ export default function Home({ darkMode }: HomeProps) {
                             },
                         }}
                     >
-                        <Card
-                            sx={{
-                                display: "flex",
-                                flexDirection: "column",
-                                p: 1,
-                                gap: 2,
-                                flexWrap: "wrap",
-                                borderRadius: "0px 0px 10px 10px",
-                                boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.5)",
-                                width: "95%",
-                                margin: "0",
-                                borderTop: "none",
-                                    pb:5,
-                                [theme.breakpoints.up("sm")]: {  
-                                    p: 3,
-                                    pb:5,
-                                    width: "90%",
-                                    boxShadow: 2,
-                                    borderRadius: 3,
-                                },
-                            }}
-                        >
-                            <FlightOptionsBar
-                                active={activeFlightOptionsBar}
-                                setActive={setActiveFlightOptionsBar}
-                                tripType={tripType}
-                                setTripType={setTripType}
-                                passengers={passengers}
-                                setPassengers={setPassengers}
-                                cabinClass={cabinClass}
-                                setCabinClass={setCabinClass}
-                            />
-                            <Box
-                                sx={{ width: "100%", display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: 1 }}
-                            >
-                                <Box 
-                                    sx= {{ display: "flex", flexWrap: "wrap", width: { xs: "100%", sm: "55%"  } }}
-                                >
-                                    <SearchBar label="From" onSelect={(airport) => setDeparture(airport)} />
-                                    <SearchBar label="To" onSelect={(airport) => setDestination(airport)} />
-                                </Box>
-                                <FlightDatePicker
-                                    tripType={tripType}
-                                    departureDate={departureDate}
-                                    setDepartureDate={setDepartureDate}
-                                    returnDate={returnDate}
-                                    setReturnDate={setReturnDate}
-                                />
-                            </Box>
-                        </Card>
+
+
+                        <FlightSearchPanel
+  activeFlightOptionsBar={activeFlightOptionsBar}
+  setActiveFlightOptionsBar={setActiveFlightOptionsBar}
+  tripType={tripType}
+  setTripType={setTripType}
+  passengers={passengers}
+  setPassengers={setPassengers}
+  cabinClass={cabinClass}
+  setCabinClass={setCabinClass}
+  departure={departure}
+  setDeparture={setDeparture}
+  destination={destination}
+  setDestination={setDestination}
+  departureDate={departureDate}
+  setDepartureDate={setDepartureDate}
+  returnDate={returnDate}
+  setReturnDate={setReturnDate}
+  handleSearch={handleSearch}
+/>
+                      
                             <Box
                                 sx={{
                                     display: "flex",
@@ -219,7 +172,12 @@ export default function Home({ darkMode }: HomeProps) {
                                         backgroundColor: "rgba(218, 218, 218, 1)", 
                                     },
                                 }}
-                                disabled={!departure || !destination}
+                                disabled={
+                                    !departure ||
+                                    !destination ||
+                                    !departureDate ||
+                                    (tripType === "round" && !returnDate)
+                                }
                                 onClick={handleSearch}
                             >
                                 <SearchIcon/>

@@ -7,7 +7,11 @@ type DarkModeChild = React.ReactElement<{ darkMode: boolean }>;
 
 export default function Layout({ children }: { children: DarkModeChild | DarkModeChild[] }) {
   const [darkMode, setDarkMode] = useState(false);
-  const theme = createTheme({ palette: { mode: darkMode ? "dark" : "light" } });
+  const theme = createTheme({ 
+    palette: { mode: darkMode ? "dark" : "light" }, 
+    typography: {
+    fontFamily: "'Google Sans', sans-serif",
+  },});
 
   return (
     <ThemeProvider theme={theme}>
