@@ -4,12 +4,13 @@ import {
     Button,
     Card,
     Typography,
-    ThemeProvider, 
-    createTheme, 
-    CssBaseline
+    useTheme,
+    // ThemeProvider, 
+    // createTheme, 
+    // CssBaseline
 } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
-import TopBar from "../components/TopBar";
+// import TopBar from "../components/TopBar";
 import { useNavigate } from "react-router-dom";
 import SearchBar from "../components/SearchBar";
 import type { Airport, Passengers } from "../types";
@@ -17,15 +18,20 @@ import FlightOptionsBar from "../components/FlightOptionsBar";
 import dayjs, { Dayjs } from "dayjs";
 import FlightDatePicker from "../components/FlightDatePicker"; 
 
-
-export default function Home() {
+type HomeProps = {
+  darkMode?: boolean; // optional
+};
+export default function Home({ darkMode }: HomeProps) {
     
-    const [darkMode, setDarkMode] = useState(false);
-    const theme = createTheme({
-        palette: {
-            mode: darkMode ? "dark" : "light",
-        },
-    });
+    const theme = useTheme();
+    // const [darkMode, setDarkMode] = useState(false);
+    // const theme = createTheme({
+    //     palette: {
+    //         mode: darkMode ? "dark" : "light",
+    //     },
+    // });
+    // const darkModeVAR= "light"
+
     const [activeFlightOptionsBar, setActiveFlightOptionsBar] = useState<string | null>(null);
     const [departure, setDeparture] = useState<Airport | null>(null);
     const [destination, setDestination] = useState<Airport | null>(null);
@@ -64,8 +70,8 @@ export default function Home() {
 
     return (
         
-        <ThemeProvider theme={theme}>
-            <CssBaseline />
+        // <ThemeProvider theme={theme}>
+        //     <CssBaseline />
             <Box 
                 onClick={() => setActiveFlightOptionsBar(null)}
                 sx={{
@@ -76,7 +82,7 @@ export default function Home() {
                     },
                 }}
             >
-                <TopBar darkMode={darkMode} setDarkMode={setDarkMode} />
+                {/* <TopBar darkMode={darkMode} setDarkMode={setDarkMode} /> */}
                 
                 <Box 
                     sx={{
@@ -223,6 +229,6 @@ export default function Home() {
                     </Box>
                 </Box>
             </Box>
-        </ThemeProvider>
+        // </ThemeProvider>
     );
 }

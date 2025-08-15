@@ -32,6 +32,7 @@ export default function TopBar({ darkMode, setDarkMode }: { darkMode: boolean; s
                 justifyContent: "space-between",
                 marginLeft: 2,
                 borderBottom: "1px solid #969696c7",
+                backgroundColor: theme.palette.background.default,
                 position: "sticky",
                 top: 0,
                 zIndex: 1000,
