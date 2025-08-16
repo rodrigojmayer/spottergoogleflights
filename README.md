@@ -1,69 +1,84 @@
-# React + TypeScript + Vite
+✈️ Google Flights Clone
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive web application replicating the core functionality and UI design of Google Flights, built with React, TypeScript, and Material UI (MUI).
+It allows users to search for flights, filter results, sort by best/cheapest, and view detailed itinerary information.
 
-Currently, two official plugins are available:
+📌 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🔍 Flight Search
 
-## Expanding the ESLint configuration
+Search flights by departure, destination, and dates.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+One-way and round-trip support.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+🎯 Filters & Sorting
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+Filter by stops, airlines, baggage, price, times, emissions, connecting airports, and duration.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Sort by Best or Cheapest flights.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+🛬 Flight Details
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+View departure/arrival times, duration, carriers, and price.
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Leg-by-leg breakdown for multi-stop itineraries.
+
+📱 Responsive Design
+
+Mobile-friendly layout using MUI’s responsive system.
+
+🛠 Tech Stack
+
+Frontend: React (with Hooks), TypeScript
+
+UI Components: Material UI (MUI v5)
+
+State Management: React Context API
+
+Routing: React Router
+
+API: Custom fetchFlightsByQuery & fetchAirportsByQuery services
+
+Date Handling: Native Date + formatting utilities
+
+🚀 Getting Started
+1️⃣ Clone the repository
+git clone https://github.com/your-username/google-flights-clone.git
+cd google-flights-clone
+
+2️⃣ Install dependencies
+npm install
+
+3️⃣ Start the development server
+npm run dev
+
+
+By default, the app runs on http://localhost:5173 (Vite) or http://localhost:3000 (CRA).
+
+⚙️ Configuration
+
+API Endpoints:
+The app uses different endpoints for development and production.
+
+Development APIs are stored in src/services/DEV/ (mock data).
+
+Production APIs are in src/services/ without the DEV folder.
+
+Ignoring DEV folder in Git:
+The development folder is excluded from version control via .gitignore:
+
+src/services/DEV/
+
+📈 Future Improvements
+
+✅ Real-time price updates
+
+✅ Integration with live airline APIs
+
+✅ Authentication for saved searches
+
+✅ Multi-city trip support
+
+📄 License
+
+This project is for educational purposes only.
